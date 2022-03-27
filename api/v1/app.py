@@ -1,6 +1,6 @@
 #!/usr/bin/python3
 """ setting up the first endpoint to return status of API """
-from flask import Flask, Blueprint
+from flask import Flask, Blueprint, jsonify
 from models import storage
 from api.v1.views import app_views
 from os import getenv
@@ -13,6 +13,11 @@ app.register_blueprint(app_views)
 def teardown_db(exception):
     """closes the storage on teardown"""
     storage.close()
+
+
+@app.errorhandler(404)
+def invalid_route(e):
+    return jsonify({'error': 'Not found'})
 
 
 if __name__ == '__main__':
