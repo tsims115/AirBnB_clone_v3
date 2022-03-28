@@ -43,13 +43,15 @@ def deleteState(state_id=None):
 @app_views.route('/states', strict_slashes=False, methods=['POST'])
 def postState():
     """creates new state objs"""
-    newData = request.get_json()
+    newData = request.get_json(silent=True)
+    if newData is None:
+        abort(400, "Not a JSON")
     if 'name' in newData.keys():
         newState = State(**newData)
         newState.save()
         return jsonify(newState.to_dict()), 201
     else:
-        abort(400, {"error": "Missing name"})
+        abort(400, "Missing name")
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
@@ -57,7 +59,9 @@ def postState():
 def putState(state_id=None):
     """updates existing specified state obj"""
     allStates = storage.all(State)
-    newData = request.get_json()
+    newData = request.get_json(silent=True)
+    if newData is None:
+        abort(400, "Not a JSON")
     if 'State.' + state_id in allStates:
         workingState = allStates['State.' + state_id]
         for attr, value in newData.items():

@@ -22,14 +22,14 @@ def invalid_route(e):
     return jsonify({'error': 'Not found'}), 404
 
 
-@app.errorhandler(400)
+"""@app.errorhandler(400)
 def invalid_route(e):
-    """400 not a JSON default error"""
+    
     if type(e.description) is dict:
         return jsonify(e.description), 400
     else:
         return jsonify({'error': 'Not a JSON'}), 400
-
+"""
 
 if __name__ == '__main__':
     host = "0.0.0.0"
