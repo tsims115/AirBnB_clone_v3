@@ -49,7 +49,7 @@ def postState():
         newState.save()
         return jsonify(newState.to_dict()), 201
     else:
-        abort(400, {"error":"Missing name"})
+        abort(400, {"error": "Missing name"})
 
 
 @app_views.route('/states/<state_id>', strict_slashes=False,
