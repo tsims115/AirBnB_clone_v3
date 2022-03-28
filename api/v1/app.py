@@ -19,6 +19,10 @@ def teardown_db(exception):
 def invalid_route(e):
     return jsonify({'error': 'Not found'}), 404
 
+@app.errorhandler(400)
+def invalid_route(e):
+    return jsonify({'error': 'Not a JSON'}), 400
+
 
 if __name__ == '__main__':
     host = "0.0.0.0"
