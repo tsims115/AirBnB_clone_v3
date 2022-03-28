@@ -35,7 +35,7 @@ def deleteState(state_id=None):
     if 'State.' + state_id in allStates:
         storage.delete(allStates['State.' + state_id])
         storage.save()
-        return {}, 200
+        return jsonify({}), 200
     else:
         abort(404)
 
