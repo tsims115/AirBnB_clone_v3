@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python3
 """sets up our api for state objs"""
 from api.v1.views import app_views
 from flask import jsonify, abort, request
