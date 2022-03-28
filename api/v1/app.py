@@ -25,7 +25,10 @@ def invalid_route(e):
 @app.errorhandler(400)
 def invalid_route(e):
     """400 not a JSON default error"""
-    return 'Not a JSON', 400
+    if type(e.description) is dict:
+        return jsonify(e.description), 400
+    else:
+        return jsonify({'error': 'Not a JSON'}), 400
 
 
 if __name__ == '__main__':
