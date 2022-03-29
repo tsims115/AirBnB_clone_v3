@@ -21,7 +21,7 @@ def places(city_id=None):
         for place in allPlace.values():
             place = place.to_dict()
             if place['city_id'] == city_id:
-                place.append(place)
+                places.append(place)
         return jsonify(places)
         """placeList = []
         for place in city.places:
