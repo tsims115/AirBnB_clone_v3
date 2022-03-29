@@ -9,7 +9,7 @@ from models.review import Review
 from models.user import User
 
 
-@app_views.route('/place/<place_id>/reviews', strict_slashes=False, methods=['GET'])
+@app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['GET'])
 def reviews(place_id=None):
     """returns all review objs"""
     place = storage.get(Place, place_id)
