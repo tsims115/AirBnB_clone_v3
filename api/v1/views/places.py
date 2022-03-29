@@ -16,11 +16,18 @@ def places(city_id=None):
     if city is None:
         abort(404)
     else:
-        placeList = []
+        allPlace = storage.all(Place)
+        places = []
+        for place in allPlace.values():
+            place = place.to_dict()
+            if place['city_id'] == city_id:
+                place.append(place)
+        return jsonify(places)
+        """placeList = []
         for place in city.places:
             place = place.to_dict()
             placeList.append(place)
-        return jsonify(placeList)
+        return jsonify(placeList)"""
 
 
 @app_views.route(
