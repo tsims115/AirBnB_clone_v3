@@ -60,7 +60,7 @@ def postPlace(city_id=None):
     if 'user_id' not in newData.keys():
         abort(400, "Missing user_id")
     else:
-        user = storage.get(User, newData.keys()['user_id'])
+        user = storage.get(User, newData['user_id'])
         if user is None:
             abort(404)
     if 'name' not in newData.keys():
