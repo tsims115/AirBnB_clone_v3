@@ -17,7 +17,7 @@ def places(city_id=None):
         abort(404)
     else:
         placeList = []
-        allPlace = storage.all(place)
+        allPlace = storage.all(Place)
         for place in allPlace:
             if place.to_dict()['city_id'] == city_id:
                 placeList.append(place.to_dict())
