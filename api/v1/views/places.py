@@ -73,6 +73,7 @@ def postPlace(city_id=None):
         if user is None:
             abort(404)
     newPlace = Place(**newData)
+    newPlace.city_id = city_id
     newPlace.save()
     return jsonify(newPlace.to_dict()), 201
 
