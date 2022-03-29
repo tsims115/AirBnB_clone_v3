@@ -26,7 +26,6 @@ def invalid_route(e):
 
 """@app.errorhandler(400)
 def invalid_route(e):
-    
     if type(e.description) is dict:
         return jsonify(e.description), 400
     else:
