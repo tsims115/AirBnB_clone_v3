@@ -9,7 +9,8 @@ from models.review import Review
 from models.user import User
 
 
-@app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['GET'])
+@app_views.route(
+    '/places/<place_id>/reviews', strict_slashes=False, methods=['GET'])
 def reviews(place_id=None):
     """returns all review objs"""
     place = storage.get(Place, place_id)
@@ -47,7 +48,8 @@ def deleteReview(review_id=None):
         return jsonify({}), 200
 
 
-@app_views.route('/places/<place_id>/reviews', strict_slashes=False, methods=['POST'])
+@app_views.route(
+    '/places/<place_id>/reviews', strict_slashes=False, methods=['POST'])
 def postReview(place_id=None):
     """creates new review objs"""
     newData = request.get_json(silent=True)
