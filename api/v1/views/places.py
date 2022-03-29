@@ -17,9 +17,10 @@ def places(city_id=None):
         abort(404)
     else:
         placeList = []
-        for place in city.places:
-            place = place.to_dict()
-            placeList.append(place)
+        allPlace = storage.all(place)
+        for place in allPlace:
+            if place['city_id'] == city_id:
+                placeList.append(place.to_dict())
         return jsonify(placeList)
 
 
