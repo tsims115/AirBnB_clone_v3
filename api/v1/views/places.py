@@ -8,7 +8,8 @@ from models.place import Place
 from models.user import User
 
 
-@app_views.route('/cities/<city_id>/places', strict_slashes=False, methods=['GET'])
+@app_views.route('/cities/<city_id>/places', strict_slashes=False,
+                 methods=['GET'])
 def places(city_id=None):
     """returns all places objs"""
     city = storage.get(City, city_id)
@@ -46,7 +47,8 @@ def deletePlace(place_id=None):
         return jsonify({}), 200
 
 
-@app_views.route('/cities/<city_id>/places', strict_slashes=False, methods=['POST'])
+@app_views.route('/cities/<city_id>/places', strict_slashes=False,
+                 methods=['POST'])
 def postPlace(city_id=None):
     """creates new place objs"""
     newData = request.get_json(silent=True)
