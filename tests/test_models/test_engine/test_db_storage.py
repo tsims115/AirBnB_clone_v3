@@ -78,7 +78,10 @@ class TestFileStorage(unittest.TestCase):
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_all_no_class(self):
         """Test that all returns all rows when no class is passed"""
-        self.assertEqual(models.storage.all(), DBStorage.all())
+        newState = State(name="NEWSTATE")
+        models.storage.new(newState)
+        models.storage.save()
+        self.assertNotEqual(models.storage.all(), models.storage.all(State))
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_new(self):
@@ -104,15 +107,20 @@ class TestFileStorage(unittest.TestCase):
     def test_get(self):
         """Tests that the get method works properly on objs"""
         newState = State()
-        gotState = DBStorage.get(State, newState.id)
+        gotState = models.storage.get(State, newState.id)
         self.AssertEqual(gotState, newState)
 
     @unittest.skipIf(models.storage_t != 'db', "not testing db storage")
     def test_count(self):
         """Tests that the count method works properly"""
-        storageCount = len(DBStorage.all())
-        stateCount = len(DBStorage.all(State))
-        userCount = len(DBStorage.all(City))
-        self.AssertEqual(storageCount, self.count())
-        self.AssertEqual(userCount, self.count(User))
-        self.AssertEqual(stateCount, self.count(State))
+        storageCount = len(models.storage.all())
+        newState = State(name="CALI")
+        newUser = User(name="Trent")
+        models.storage.new(newState)
+        models.storage.new(newUser)
+        models.storage.save()
+        stateCount = len(models.storage.all(State))
+        userCount = len(models.storage.all(User))
+        self.assertEqual(storageCount, models.storage.count())
+        self.assertEqual(userCount, models.storage.count(User))
+        self.assertEqual(stateCount, models.storage.count(State))
